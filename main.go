@@ -13,12 +13,12 @@ func main() {
 	fmt.Println("Go-Mongo-App")
 	e := echo.New()
 	e.Use(middleware.Logger())
-	uc := controllers.NewSubjectController(getSession())
-	e.GET("/subjects", uc.GetAll)
-	e.POST("/subjects", uc.Create)
-	e.GET("/subjects/:id", uc.GetOne)
-	e.PUT("/subjects/:id", uc.Update)
-	e.DELETE("/subjects/:id", uc.Delete)
+	SubjectController := controllers.NewSubjectController(getSession())
+	e.GET("/subjects/:id", SubjectController.GetOne)
+	e.GET("/subjects", SubjectController.GetAll)
+	e.POST("/subjects", SubjectController.Create)
+	e.PUT("/subjects/:id", SubjectController.Update)
+	e.DELETE("/subjects/:id", SubjectController.Delete)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
