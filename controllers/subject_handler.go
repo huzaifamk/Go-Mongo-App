@@ -44,6 +44,7 @@ func (c *SubjectController) GetAll(e echo.Context) error {
 
 func (c *SubjectController) Create(e echo.Context) error {
 	var subject models.Subject
+	subject.ID = bson.NewObjectId()
 	err := e.Bind(&subject)
 	if err != nil {
 		return err
