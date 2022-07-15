@@ -62,6 +62,7 @@ func (c *SubjectController) Create(e echo.Context) error {
 func (c *SubjectController) Update(e echo.Context) error {
 	id := e.Param("id")
 	var subject models.Subject
+	subject.ID = bson.ObjectIdHex(id)
 	err := e.Bind(&subject)
 	if err != nil {
 		return err
