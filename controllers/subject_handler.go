@@ -25,7 +25,7 @@ func (c *SubjectController) GetOne(e echo.Context) error {
 	var subject models.Subject
 	err := collection.Find(bson.M{"_id": bson.ObjectIdHex(id)}).One(&subject)
 	if err != nil {
-		return err
+		return e.JSON(http.StatusNotFound, map[string]string{"result": "not found"})
 	}
 	return e.JSON(http.StatusOK, subject)
 }
