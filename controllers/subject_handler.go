@@ -106,5 +106,5 @@ func (c *SubjectController) Login(e echo.Context) error {
 	if result.Password != user.Password {
 		return e.JSON(http.StatusUnauthorized, map[string]string{"result": "unauthorized"})
 	}
-	return e.JSON(http.StatusOK, result)
+	return e.JSON(http.StatusOK, map[string]string{"result": "success"})
 }
