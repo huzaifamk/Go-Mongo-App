@@ -93,8 +93,8 @@ func (c *SubjectController) Delete(e echo.Context) error {
 func (c *SubjectController) Login(e echo.Context) error {
 	// var user models.User
 	e.Request().ParseForm()
-	fmt.Println("username:", e.Request().FormValue("username"))
-	fmt.Println("password:", e.Request().FormValue("password"))
+	fmt.Println(e.Request().FormValue("username"))
+	fmt.Println(e.Request().FormValue("password"))
 	// err := e.Bind(&user)
 	// if err != nil {
 	// 	return err

@@ -21,7 +21,7 @@ func main() {
 	e.PUT("/subjects/:id", SubjectController.Update)
 	e.DELETE("/subjects/:id", SubjectController.Delete)
 	e.POST("/login", SubjectController.Login)
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(":5500"))
 }
 
 func getSession() *mgo.Session {
