@@ -13,6 +13,7 @@ func main() {
 	fmt.Println("Go-Mongo-App")
 	e := echo.New()
 	e.Use(middleware.Logger())
+	e.Use(middleware.CORS())
 	SubjectController := controllers.NewSubjectController(getSession())
 	e.GET("/subjects/:id", SubjectController.GetOne)
 	e.GET("/subjects", SubjectController.GetAll)

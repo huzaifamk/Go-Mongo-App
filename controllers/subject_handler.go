@@ -88,3 +88,4 @@ func (c *SubjectController) Delete(e echo.Context) error {
 	}
 	return e.JSON(http.StatusOK, map[string]string{"result": "success"})
 }
+
