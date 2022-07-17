@@ -20,6 +20,7 @@ func main() {
 	e.POST("/subjects", SubjectController.Create)
 	e.PUT("/subjects/:id", SubjectController.Update)
 	e.DELETE("/subjects/:id", SubjectController.Delete)
+	e.POST("/login", SubjectController.Login)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
