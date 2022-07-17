@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 
 	models "github.com/huzaifamk/Go-Mongo-App/models"
@@ -91,24 +90,21 @@ func (c *SubjectController) Delete(e echo.Context) error {
 }
 
 func (c *SubjectController) Login(e echo.Context) error {
-	// var user models.User
-	e.Request().ParseForm()
-	fmt.Println(e.Request().FormValue("username"))
-	fmt.Println(e.Request().FormValue("password"))
-	// err := e.Bind(&user)
-	// if err != nil {
-	// 	return err
-	// }
-	// session := c.s.Copy()
-	// defer session.Close()
-	// collection := session.DB("test").C("users")
-	// var result models.User
-	// err = collection.Find(bson.M{"username": user.Username}).One(&result)
-	// if err != nil {
-	// 	return err
-	// }
-	// if result.Password != user.Password {
-	// 	return e.JSON(http.StatusUnauthorized, map[string]string{"result": "unauthorized"})
-	// }
+	var user models.User
+	err := e.Bind(&user)
+	if err != nil {
+		return err
+	}
+	session := c.s.Copy()
+	defer session.Close()
+	collection := session.DB("test").C("users")
+	var result models.User
+	err = collection.Find(bson.M{"username": user.Username}).One(&result)
+	if err != nil {
+		return err
+	}
+	if result.Password != user.Password {
+		return e.JSON(http.StatusUnauthorized, map[string]string{"result": "unauthorized"})
+	}
 	return e.JSON(http.StatusOK, map[string]string{"result": "success"})
 }
