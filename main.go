@@ -20,7 +20,8 @@ func main() {
 	e.POST("/subjects", SubjectController.Create)
 	e.PUT("/subjects/:id", SubjectController.Update)
 	e.DELETE("/subjects/:id", SubjectController.Delete)
-	e.POST("/login", SubjectController.Login)
+	e.POST("/postform", SubjectController.PostForm)
+	e.POST(".postfile", SubjectController.PostFile)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
