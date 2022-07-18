@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	models "github.com/huzaifamk/Go-Mongo-App/models"
+	helpers "github.com/huzaifamk/Go-Mongo-App/helper"
 	"github.com/labstack/echo/v4"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -101,10 +102,23 @@ func (c *SubjectController) PostForm(e echo.Context) error {
 	return e.JSON(http.StatusOK, map[string]string{"result": "success"})
 }
 
-func (c *SubjectController) PostFile(e echo.Context) error {
-
-
-	
-
-	return e.JSON(http.StatusOK, map[string]string{"result": "success"})
+func (c *SubjectController) UploadFile(e echo.Context) error {
+	file, err := e.FormFile("file")
+	if err != nil {
+		return err
+	}
+	src, err := file.Open()
+	if err != nil {
+		return err
+	}
+	defer src.Close()
+	result, err := helpers.UploadToS3(e, file.Filename, src)
+	if err != nil {
+		return err
+	}
+	data := &models.UploadResult{
+		Path: result,
+	}
+	return e.JSON(http.StatusOK, data)
 }
+

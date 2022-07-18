@@ -21,7 +21,7 @@ func main() {
 	e.PUT("/subjects/:id", SubjectController.Update)
 	e.DELETE("/subjects/:id", SubjectController.Delete)
 	e.POST("/postform", SubjectController.PostForm)
-	e.POST(".postfile", SubjectController.PostFile)
+	e.POST("/uploadfile", SubjectController.UploadFile)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
